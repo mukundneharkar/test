@@ -1,0 +1,308 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Generated API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/rest/configurations": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRestConfiguration"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/instance_property/ingest": {
+      "put": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestInstancePropertiesV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestInstancePropertiesV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/rest/metric/ingest": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestMetricsV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/rest/metric/metrics/ingest": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/rest/resource_property/ingest": {
+      "put": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestResourcePropertiesV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestResourcePropertiesV1"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/rest/status": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/rest/version": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MapStringString": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "RestInstancePropertiesV1": {
+        "type": "object",
+        "properties": {
+          "dataSource": {
+            "type": "string"
+          },
+          "dataSourceDisplayName": {
+            "type": "string"
+          },
+          "instanceName": {
+            "type": "string"
+          },
+          "instanceProperties": {
+            "$ref": "#/components/schemas/MapStringString"
+          },
+          "resourceIds": {
+            "$ref": "#/components/schemas/MapStringString"
+          }
+        }
+      },
+      "RestResourcePropertiesV1": {
+        "type": "object",
+        "properties": {
+          "resourceIds": {
+            "$ref": "#/components/schemas/MapStringString"
+          },
+          "resourceName": {
+            "type": "string"
+          },
+          "resourceProperties": {
+            "$ref": "#/components/schemas/MapStringString"
+          }
+        }
+      },
+      "RestDataSourceInstanceV1": {
+        "type": "object",
+        "properties": {
+          "dataPoints": {
+            "$ref": "#/components/schemas/ListRestDataPointV1"
+          },
+          "instanceDescription": {
+            "type": "string"
+          },
+          "instanceDisplayName": {
+            "type": "string"
+          },
+          "instanceName": {
+            "type": "string"
+          },
+          "instanceProperties": {
+            "$ref": "#/components/schemas/MapStringString"
+          },
+          "instanceResourceIds": {
+            "$ref": "#/components/schemas/MapStringString"
+          }
+        }
+      },
+      "ListRestDataSourceInstanceV1": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RestDataSourceInstanceV1"
+        }
+      },
+      "RestDataPointV1": {
+        "type": "object",
+        "properties": {
+          "dataPointAggregationType": {
+            "type": "string"
+          },
+          "dataPointDescription": {
+            "type": "string"
+          },
+          "dataPointName": {
+            "type": "string"
+          },
+          "dataPointType": {
+            "type": "string"
+          },
+          "values": {
+            "$ref": "#/components/schemas/MapStringString"
+          }
+        }
+      },
+      "ListRestDataPointV1": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RestDataPointV1"
+        }
+      },
+      "RestMetricsV1": {
+        "type": "object",
+        "properties": {
+          "dataSource": {
+            "type": "string"
+          },
+          "dataSourceDisplayName": {
+            "type": "string"
+          },
+          "instances": {
+            "$ref": "#/components/schemas/ListRestDataSourceInstanceV1"
+          },
+          "resourceDescription": {
+            "type": "string"
+          },
+          "resourceIds": {
+            "$ref": "#/components/schemas/MapStringString"
+          },
+          "resourceName": {
+            "type": "string"
+          },
+          "resourceProperties": {
+            "$ref": "#/components/schemas/MapStringString"
+          },
+          "resourceType": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "RestConfiguration": {
+        "type": "object",
+        "properties": {
+          "defaultValue": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "isSensitive": {
+            "type": "boolean"
+          },
+          "key": {
+            "type": "string"
+          },
+          "localOnly": {
+            "type": "boolean"
+          },
+          "requireRestart": {
+            "type": "boolean"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "ListRestConfiguration": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RestConfiguration"
+        }
+      }
+    }
+  }
+}
