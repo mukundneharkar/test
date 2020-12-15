@@ -1,307 +1,817 @@
 {
-  "openapi": "3.0.3",
-  "info": {
-    "title": "Generated API",
-    "version": "1.0"
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "LogicMonitor API-Ingest Rest API",
+    "description" : "LogicMonitor is a SaaS-based performance monitoring platform that provides full visibility into complex, hybrid infrastructures, offering granular performance monitoring and actionable data and insights. API-Ingest provides the entry point in the form of public rest APIs for ingesting metrics into LogicMonitor. For using this application users have to create LMAuth token using access id and key from santaba.",
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version" : "1.0.0"
   },
-  "paths": {
-    "/rest/configurations": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListRestConfiguration"
+  "externalDocs" : {
+    "description" : "LogicMonitor Support Docs",
+    "url" : "https://www.logicmonitor.com/support/rest-api-developers-guide/overview/using-logicmonitors-rest-api"
+  },
+  "paths" : {
+    "/rest/instance_property/ingest" : {
+      "put" : {
+        "summary" : "UpdateInstancePropertiesAPI",
+        "description" : "UpdateInstancePropertiesAPI is for the purpose of updating instance properties for any resource to the LM application. It needs payload of object type RestInstancePropertiesV1. Payload is then validated with series of validation, successfully verified metrics will be ingested to Kafka. Only PUT and PATCH method will be applied to this API",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RestInstancePropertiesV1"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "202" : {
+            "description" : "The request has been accepted for processing, but the processing has not been completed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Received a bad request.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authentication error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "402" : {
+            "description" : "Push Metrics feature is disabled for company.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Invalid user permission.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Company not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "HTTP Method Not Allowed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "HTTP 415 Unsupported Media Type.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Something went wrong. Could not process your request right now.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
                 }
               }
             }
           }
-        }
-      }
-    },
-    "/rest/instance_property/ingest": {
-      "put": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RestInstancePropertiesV1"
-              }
-            }
-          }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "security" : [ {
+          "LMv1token" : [ ]
+        } ]
       },
-      "patch": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RestInstancePropertiesV1"
+      "patch" : {
+        "summary" : "UpdateInstancePropertiesAPI",
+        "description" : "UpdateInstancePropertiesAPI is for the purpose of updating instance properties for any resource to the LM application. It needs payload of object type RestInstancePropertiesV1. Payload is then validated with series of validation, successfully verified metrics will be ingested to Kafka. Only PUT and PATCH method will be applied to this API",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RestInstancePropertiesV1"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
+        "responses" : {
+          "202" : {
+            "description" : "The request has been accepted for processing, but the processing has not been completed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Received a bad request.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authentication error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "402" : {
+            "description" : "Push Metrics feature is disabled for company.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Invalid user permission.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Company not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "HTTP Method Not Allowed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "HTTP 415 Unsupported Media Type.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Something went wrong. Could not process your request right now.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
           }
-        }
+        },
+        "security" : [ {
+          "LMv1token" : [ ]
+        } ]
       }
     },
-    "/rest/metric/ingest": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RestMetricsV1"
+    "/rest/metric/ingest" : {
+      "post" : {
+        "summary" : "MetricIngestAPI",
+        "description" : "MetricIngestAPI is used for the purpose of ingesting raw metrics to the LM application. It needs metrics in the format of RestMetricsV1 object. Payload is then validated with series of validation, successfully verified metrics will be ingested to Kafka. Only POST method is applied to this API",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RestMetricsV1"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
+        "responses" : {
+          "202" : {
+            "description" : "The request has been accepted for processing, but the processing has not been completed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Received a bad request.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authentication error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "402" : {
+            "description" : "Push Metrics feature is disabled for company.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Invalid user permission.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Company not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "HTTP Method Not Allowed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "HTTP 415 Unsupported Media Type.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Something went wrong. Could not process your request right now.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
           }
-        }
+        },
+        "security" : [ {
+          "LMv1token" : [ ]
+        } ]
       }
     },
-    "/rest/metric/metrics/ingest": {
-      "post": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object"
+    "/rest/resource_property/ingest" : {
+      "put" : {
+        "summary" : "UpdateResourcePropertiesAPI",
+        "description" : "UpdateResourcePropertiesAPI is for the purpose of updating resource properties for any resource to the LM application. It needs payload of object type RestResourcePropertiesV1. Payload is then validated with series of validation, successfully verified metrics will be ingested to Kafka. Only PUT and PATCH method will be applied to this API",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RestResourcePropertiesV1"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/rest/resource_property/ingest": {
-      "put": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RestResourcePropertiesV1"
+        "responses" : {
+          "202" : {
+            "description" : "The request has been accepted for processing, but the processing has not been completed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Received a bad request.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authentication error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "402" : {
+            "description" : "Push Metrics feature is disabled for company.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Invalid user permission.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Company not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "HTTP Method Not Allowed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "HTTP 415 Unsupported Media Type.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Something went wrong. Could not process your request right now.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        "security" : [ {
+          "LMv1token" : [ ]
+        } ]
       },
-      "patch": {
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RestResourcePropertiesV1"
+      "patch" : {
+        "summary" : "UpdateResourcePropertiesAPI",
+        "description" : "UpdateResourcePropertiesAPI is for the purpose of updating resource properties for any resource to the LM application. It needs payload of object type RestResourcePropertiesV1. Payload is then validated with series of validation, successfully verified metrics will be ingested to Kafka. Only PUT and PATCH method will be applied to this API",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RestResourcePropertiesV1"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
+        "responses" : {
+          "202" : {
+            "description" : "The request has been accepted for processing, but the processing has not been completed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Received a bad request.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PushMetricAPIResponse"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Authentication error.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "402" : {
+            "description" : "Push Metrics feature is disabled for company.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Invalid user permission.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Company not found.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "HTTP Method Not Allowed.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "415" : {
+            "description" : "HTTP 415 Unsupported Media Type.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Something went wrong. Could not process your request right now.",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "example" : {
+                    "message" : "string",
+                    "timestamp" : 0
+                  }
+                }
+              }
+            }
           }
-        }
-      }
-    },
-    "/rest/status": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/rest/version": {
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
+        },
+        "security" : [ {
+          "LMv1token" : [ ]
+        } ]
       }
     }
   },
-  "components": {
-    "schemas": {
-      "MapStringString": {
-        "type": "object",
-        "additionalProperties": {
-          "type": "string"
+  "components" : {
+    "schemas" : {
+      "MapStringString" : {
+        "type" : "object",
+        "additionalProperties" : {
+          "type" : "string"
         }
       },
-      "RestInstancePropertiesV1": {
-        "type": "object",
-        "properties": {
-          "dataSource": {
-            "type": "string"
+      "RestInstancePropertiesV1" : {
+        "type" : "object",
+        "properties" : {
+          "dataSource" : {
+            "type" : "string"
           },
-          "dataSourceDisplayName": {
-            "type": "string"
+          "dataSourceDisplayName" : {
+            "type" : "string"
           },
-          "instanceName": {
-            "type": "string"
+          "instanceName" : {
+            "type" : "string"
           },
-          "instanceProperties": {
-            "$ref": "#/components/schemas/MapStringString"
+          "instanceProperties" : {
+            "$ref" : "#/components/schemas/MapStringString"
           },
-          "resourceIds": {
-            "$ref": "#/components/schemas/MapStringString"
+          "resourceIds" : {
+            "$ref" : "#/components/schemas/MapStringString"
           }
         }
       },
-      "RestResourcePropertiesV1": {
-        "type": "object",
-        "properties": {
-          "resourceIds": {
-            "$ref": "#/components/schemas/MapStringString"
+      "PushMetricAPIResponse" : {
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
           },
-          "resourceName": {
-            "type": "string"
+          "resourceIds" : {
+            "$ref" : "#/components/schemas/MapStringString"
           },
-          "resourceProperties": {
-            "$ref": "#/components/schemas/MapStringString"
+          "timestamp" : {
+            "format" : "int64",
+            "type" : "integer"
           }
         }
       },
-      "RestDataSourceInstanceV1": {
-        "type": "object",
-        "properties": {
-          "dataPoints": {
-            "$ref": "#/components/schemas/ListRestDataPointV1"
+      "RestResourcePropertiesV1" : {
+        "type" : "object",
+        "properties" : {
+          "resourceIds" : {
+            "$ref" : "#/components/schemas/MapStringString"
           },
-          "instanceDescription": {
-            "type": "string"
+          "resourceName" : {
+            "type" : "string"
           },
-          "instanceDisplayName": {
-            "type": "string"
-          },
-          "instanceName": {
-            "type": "string"
-          },
-          "instanceProperties": {
-            "$ref": "#/components/schemas/MapStringString"
-          },
-          "instanceResourceIds": {
-            "$ref": "#/components/schemas/MapStringString"
+          "resourceProperties" : {
+            "$ref" : "#/components/schemas/MapStringString"
           }
         }
       },
-      "ListRestDataSourceInstanceV1": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/RestDataSourceInstanceV1"
-        }
-      },
-      "RestDataPointV1": {
-        "type": "object",
-        "properties": {
-          "dataPointAggregationType": {
-            "type": "string"
+      "RestDataSourceInstanceV1" : {
+        "type" : "object",
+        "properties" : {
+          "dataPoints" : {
+            "$ref" : "#/components/schemas/ListRestDataPointV1"
           },
-          "dataPointDescription": {
-            "type": "string"
+          "instanceDescription" : {
+            "type" : "string"
           },
-          "dataPointName": {
-            "type": "string"
+          "instanceDisplayName" : {
+            "type" : "string"
           },
-          "dataPointType": {
-            "type": "string"
+          "instanceName" : {
+            "type" : "string"
           },
-          "values": {
-            "$ref": "#/components/schemas/MapStringString"
+          "instanceProperties" : {
+            "$ref" : "#/components/schemas/MapStringString"
+          },
+          "instanceResourceIds" : {
+            "$ref" : "#/components/schemas/MapStringString"
           }
         }
       },
-      "ListRestDataPointV1": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/RestDataPointV1"
+      "ListRestDataSourceInstanceV1" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/RestDataSourceInstanceV1"
         }
       },
-      "RestMetricsV1": {
-        "type": "object",
-        "properties": {
-          "dataSource": {
-            "type": "string"
+      "RestDataPointV1" : {
+        "type" : "object",
+        "properties" : {
+          "dataPointAggregationType" : {
+            "type" : "string"
           },
-          "dataSourceDisplayName": {
-            "type": "string"
+          "dataPointDescription" : {
+            "type" : "string"
           },
-          "instances": {
-            "$ref": "#/components/schemas/ListRestDataSourceInstanceV1"
+          "dataPointName" : {
+            "type" : "string"
           },
-          "resourceDescription": {
-            "type": "string"
+          "dataPointType" : {
+            "type" : "string"
           },
-          "resourceIds": {
-            "$ref": "#/components/schemas/MapStringString"
-          },
-          "resourceName": {
-            "type": "string"
-          },
-          "resourceProperties": {
-            "$ref": "#/components/schemas/MapStringString"
-          },
-          "resourceType": {
-            "format": "int32",
-            "type": "integer"
+          "values" : {
+            "$ref" : "#/components/schemas/MapStringString"
           }
         }
       },
-      "RestConfiguration": {
-        "type": "object",
-        "properties": {
-          "defaultValue": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "isSensitive": {
-            "type": "boolean"
-          },
-          "key": {
-            "type": "string"
-          },
-          "localOnly": {
-            "type": "boolean"
-          },
-          "requireRestart": {
-            "type": "boolean"
-          },
-          "version": {
-            "type": "string"
-          }
+      "ListRestDataPointV1" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/RestDataPointV1"
         }
       },
-      "ListRestConfiguration": {
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/RestConfiguration"
+      "RestMetricsV1" : {
+        "type" : "object",
+        "properties" : {
+          "dataSource" : {
+            "type" : "string"
+          },
+          "dataSourceDisplayName" : {
+            "type" : "string"
+          },
+          "instances" : {
+            "$ref" : "#/components/schemas/ListRestDataSourceInstanceV1"
+          },
+          "resourceDescription" : {
+            "type" : "string"
+          },
+          "resourceIds" : {
+            "$ref" : "#/components/schemas/MapStringString"
+          },
+          "resourceName" : {
+            "type" : "string"
+          },
+          "resourceProperties" : {
+            "$ref" : "#/components/schemas/MapStringString"
+          }
         }
+      }
+    },
+    "securitySchemes" : {
+      "LMv1token" : {
+        "type" : "apiKey",
+        "description" : "Provide LMv1 token here for accessing API",
+        "name" : "Authorization",
+        "in" : "header",
+        "scheme" : "apiKey"
       }
     }
   }
