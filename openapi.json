@@ -141,7 +141,7 @@
           }
         },
         "security" : [ {
-          "LMv1token" : [ ]
+          "LMv1" : [ ]
         } ]
       },
       "patch" : {
@@ -270,7 +270,7 @@
           }
         },
         "security" : [ {
-          "LMv1token" : [ ]
+          "LMv1" : [ ]
         } ]
       }
     },
@@ -401,7 +401,7 @@
           }
         },
         "security" : [ {
-          "LMv1token" : [ ]
+          "LMv1" : [ ]
         } ]
       }
     },
@@ -532,7 +532,7 @@
           }
         },
         "security" : [ {
-          "LMv1token" : [ ]
+          "LMv1" : [ ]
         } ]
       },
       "patch" : {
@@ -661,7 +661,7 @@
           }
         },
         "security" : [ {
-          "LMv1token" : [ ]
+          "LMv1" : [ ]
         } ]
       }
     }
@@ -806,12 +806,11 @@
       }
     },
     "securitySchemes" : {
-      "LMv1token" : {
+      "LMv1" : {
         "type" : "apiKey",
         "description" : "Provide LMv1 token here for accessing API",
         "name" : "Authorization",
-        "in" : "header",
-        "scheme" : "apiKey"
+        "in" : "header"
       }
     }
   }
